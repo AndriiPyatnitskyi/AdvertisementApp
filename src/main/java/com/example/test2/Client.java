@@ -1,7 +1,5 @@
 package com.example.test2;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -16,9 +14,9 @@ public class Client {
     private static String MAIN_URL = "http://localhost:8080/";
 
     public static void main(String[] args) throws IOException {
-        List<String> filesList = getFilesList("http://localhost:8080/list");
+        List<String> filesList = getFilesList(MAIN_URL + "get-list-of-files");
         for (String fileName : filesList) {
-            downloadAndSaveFile(MAIN_URL + "getfiles/" + fileName, fileName);
+            downloadAndSaveFile(MAIN_URL + "get-file/" + fileName, fileName);
         }
     }
 
@@ -31,8 +29,7 @@ public class Client {
 
         List<String> resultList = new ArrayList<>();
 
-        try (BufferedReader bufferedReader = new BufferedReader(inputStreamReader))
-        {
+        try (BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             String inputLine;
             while ((inputLine = bufferedReader.readLine()) != null) {
                 String substring = inputLine.substring(1, inputLine.length() - 1);

@@ -21,13 +21,13 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class HelloWorldController {
+public class FileDownloadController {
     //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C:\\folder";
 
 
 
-    @RequestMapping("/list")
+    @RequestMapping("/get-list-of-files")
     public List<String> filesList() {
         File folder = new File(UPLOADED_FOLDER);
         File[] listOfFiles = folder.listFiles();
@@ -45,7 +45,7 @@ public class HelloWorldController {
         return list;
     }
 
-    @RequestMapping(value = "/getfiles/{file_name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-file/{file_name}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<byte[]> getFile(@PathVariable("file_name") String fileName, HttpServletResponse response) {
         ResponseEntity<byte[]> result = null;
