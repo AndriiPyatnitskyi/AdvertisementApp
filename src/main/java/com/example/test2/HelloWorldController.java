@@ -1,29 +1,30 @@
 package com.example.test2;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class HelloWorldController {
     //Save the uploaded file to this folder
     private static String UPLOADED_FOLDER = "C:\\folder";
 
-    @RequestMapping("/")
-    public String sayHello() {
-        return "Hello Spring Boot!!";
-    }
 
 
     @RequestMapping("/list")
@@ -43,32 +44,6 @@ public class HelloWorldController {
 
         return list;
     }
-
-//    @RequestMapping(path = "/download", method = RequestMethod.GET)
-//    public void download(HttpServletResponse response) throws IOException {
-//
-//        // ...
-//
-//        File file = new File("C:\\folder");
-//
-//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-////        return ResponseEntity.ok()
-////                .headers(((ServletServerHttpResponse.ServletResponseHttpHeaders) new HttpHeaders()))
-////                .contentLength(file.length())
-////                .contentType(MediaType.parseMediaType("application/octet-stream"))
-////                .body(resource);
-//        response.flushBuffer();
-//    }
-
-    @RequestMapping(value = "/files/{file_name}", method = RequestMethod.GET)
-    @ResponseBody
-    public FileSystemResource getFile(@PathVariable("file_name") String fileName) {
-        File file = new File("C:\\folder\\TODO.txt");
-//        file = new File("C:\\folder\\Шефер К., Хо К., Харроп Р. - Spring 4 для профессионалов - 2015.pdf");
-        FileSystemResource fileSystemResource = new FileSystemResource(file);
-        return fileSystemResource;
-    }
-
 
     @RequestMapping(value = "/getfiles/{file_name}", method = RequestMethod.GET)
     @ResponseBody
