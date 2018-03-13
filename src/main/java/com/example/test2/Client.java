@@ -63,11 +63,9 @@ public class Client {
     }
 
     public static byte[] getBytes(InputStream is) throws IOException {
-
         int len;
         int size = 1024;
         byte[] buf;
-
         if (is instanceof ByteArrayInputStream) {
             size = is.available();
             buf = new byte[size];
